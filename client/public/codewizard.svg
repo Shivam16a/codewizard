@@ -1,0 +1,37 @@
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circle -->
+  <circle cx="100" cy="100" r="90" fill="url(#grad)" />
+
+  <!-- Wizard Hat -->
+  <polygon
+    points="100,35 65,110 135,110"
+    fill="#111827"
+  />
+  <rect x="60" y="105" width="80" height="10" fill="#111827" />
+
+  <!-- Code Symbol -->
+  <text
+    x="100"
+    y="155"
+    text-anchor="middle"
+    font-size="32"
+    font-weight="700"
+    fill="#ffffff"
+    font-family="monospace"
+  >
+    &lt;/&gt;
+  </text>
+</svg>
