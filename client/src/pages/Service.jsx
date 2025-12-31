@@ -10,6 +10,7 @@ const Service = () => {
     try {
       const response = await fetch(url, {
         method: "GET",
+        credentials:"include",
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");

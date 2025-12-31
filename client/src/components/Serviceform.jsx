@@ -26,6 +26,7 @@ const Serviceform = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(serviceData),
+                credentials:"include",
             });
             if (request.ok) {
                 setServiceData({

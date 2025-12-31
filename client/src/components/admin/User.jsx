@@ -30,6 +30,7 @@ const User = () => {
         try {
             const res = await fetch("http://localhost:5000/api/admin/user", {
                 method: "GET",
+                credentials:"include",
             });
             const data = await res.json();
             // console.log(data);
@@ -45,6 +46,7 @@ const User = () => {
         try {
             const response = await fetch(`http://localhost:5000/api/admin/deleteuser/${id}`, {
                 method: "DELETE",
+                credentials:"include",
             });
             const data = await response.json();
 
@@ -69,7 +71,8 @@ const User = () => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(formData),
+                    credentials:"include",
                 }
             );
 

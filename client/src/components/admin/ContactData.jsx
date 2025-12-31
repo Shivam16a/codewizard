@@ -24,6 +24,7 @@ const ContactData = () => {
         try {
             const response = await fetch(`http://localhost:5000/api/contact/deletcontact/${id}`, {
                 method: "DELETE",
+                credentials:"include",
             })
             const data = await response.json();
 
