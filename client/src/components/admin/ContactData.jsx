@@ -36,6 +36,7 @@ const ContactData = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Message</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
@@ -46,6 +47,7 @@ const ContactData = () => {
                             <td>{contact.username}</td>
                             <td>{contact.email}</td>
                             <td>{contact.message}</td>
+                            <td><button>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>

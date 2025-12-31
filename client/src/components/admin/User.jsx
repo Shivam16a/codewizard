@@ -37,6 +37,8 @@ const User = () => {
                         <th>Username</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 
@@ -47,6 +49,8 @@ const User = () => {
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
+                            <td><button>Edit</button></td>
+                            <td><button>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
