@@ -5,11 +5,11 @@ import "./Login.css"
 import { useAuth } from '../store/Auth'
 import { toast } from 'react-toastify';
 
-const url = "http://localhost:5000/api/auth/login";
+// const url = "http://localhost:5000/api/auth/login";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { storeTokenInLS } = useAuth();
+  const { storeTokenInLS, API } = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -26,11 +26,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
-        credentials:"include",
+        credentials: "include",
       });
       if (response.ok) {
         setUser({
@@ -96,7 +96,7 @@ const Login = () => {
             <div>
               <button type='submit'>Login</button>
             </div>
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
               <span>don't have an account <a href="/register">Register Now!</a></span>
             </div>
           </form>

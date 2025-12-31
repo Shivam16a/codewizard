@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import "./Service.css"
+import { useAuth } from '../store/Auth'
 
-const url = "http://localhost:5000/api/service/serviceform";
+// const url = "http://localhost:5000${API}/api/service/serviceform";
 const Serviceform = () => {
+    const {API} = useAuth();
     const [serviceData, setServiceData] = useState({
         service: "",
         discription: "",
@@ -22,7 +24,7 @@ const Serviceform = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const request = await fetch(url, {
+            const request = await fetch(`${API}/api/service/serviceform`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(serviceData),

@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import "./Service.css"
 import image1 from "../assets/image2.avif"
+import { useAuth } from '../store/Auth'
 
-const url = "http://localhost:5000/api/service/servicedata";
+// const url = "http://localhost:5000${API}/api/service/servicedata";
 
 const Service = () => {
+  const {API} = useAuth();
   const [services, setServices] = useState([]);
   const servicedata = async () => {
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${API}/api/service/servicedata`, {
         method: "GET",
         credentials:"include",
       });

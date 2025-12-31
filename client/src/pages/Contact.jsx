@@ -2,7 +2,7 @@ import { useState } from "react";
 import image2 from '../assets/image2.avif'
 import './Contact.css'
 import { useAuth } from '../store/Auth';
-const url = "http://localhost:5000/api/contact/message";
+// const url = "http://localhost:5000/api/contact/message";
 import { toast } from 'react-toastify';
 
 const Contact = () => {
@@ -14,16 +14,16 @@ const Contact = () => {
   });
 
   const [userData, setUserData] = useState(true);
-  const { users } = useAuth();
+  const { users, API } = useAuth();
 
   if (users && userData) {
-      setUser({
-        username: users.username,
-        email: users.email,
-        message: "",
-      });
-      setUserData(false);
-    }
+    setUser({
+      username: users.username,
+      email: users.email,
+      message: "",
+    });
+    setUserData(false);
+  }
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -38,11 +38,11 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${API}/api/contact/message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
-        credentials:"include",
+        credentials: "include",
       });
       if (response.ok) {
         setUser({
@@ -61,7 +61,7 @@ const Contact = () => {
   }
 
   return <>
-    <section style={{ paddingTop: "4rem", marginBottom:"2rem" }}>
+    <section style={{ paddingTop: "4rem", marginBottom: "2rem" }}>
       <div className="parrent-div">
         <div className="left-clild">
           <img src={image2} alt="contact image1" />

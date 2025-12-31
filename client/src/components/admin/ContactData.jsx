@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import "./Admin.css"
 import { toast } from 'react-toastify';
+import { useAuth } from "../../store/Auth";
 
 const ContactData = () => {
+    const { API } = useAuth();
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const getContactData = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/contact/contactdata", {
+            const res = await fetch(`${API}/api/contact/contactdata`, {
                 method: "GET",
             });
             const data = await res.json();
@@ -22,9 +24,9 @@ const ContactData = () => {
 
     const deletecontact = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/contact/deletcontact/${id}`, {
+            const response = await fetch(`${API}/api/contact/deletcontact/${id}`, {
                 method: "DELETE",
-                credentials:"include",
+                credentials: "include",
             })
             const data = await response.json();
 

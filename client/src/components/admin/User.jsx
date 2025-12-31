@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./Admin.css"
 import { toast } from 'react-toastify';
+import { useAuth } from "../../store/Auth";
 
 const User = () => {
+    const {API} = useAuth();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editUser, setEditUser] = useState(null);
@@ -28,7 +30,7 @@ const User = () => {
 
     const getUsersData = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/admin/user", {
+            const res = await fetch(`${API}/api/admin/user`, {
                 method: "GET",
                 credentials:"include",
             });
@@ -44,7 +46,7 @@ const User = () => {
 
     const deletuser = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/admin/deleteuser/${id}`, {
+            const response = await fetch(`${API}/api/admin/deleteuser/${id}`, {
                 method: "DELETE",
                 credentials:"include",
             });
@@ -65,7 +67,7 @@ const User = () => {
     const updateuser = async () => {
         try {
             const response = await fetch(
-                `http://localhost:5000/api/admin/updateuser/${editUser}`,
+                `${API}/api/admin/updateuser/${editUser}`,
                 {
                     method: "PUT",
                     headers: {

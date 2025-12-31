@@ -3,7 +3,8 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
-const url = "http://localhost:5000/api/auth/user";
+const API = import.meta.env.VITE_API_URL;
+// const url = "http://localhost:5000/api/auth/user";
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
         const userAuthentication = async () => {
             try {
-                const response = await fetch(url, {
+                const response = await fetch(`${API}/api/auth/user`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ storeTokenInLS, logoutUser, isLoggedIn, users }}
+            value={{ storeTokenInLS, logoutUser, isLoggedIn, users, API }}
         >
             {children}
         </AuthContext.Provider>

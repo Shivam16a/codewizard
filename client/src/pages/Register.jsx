@@ -5,11 +5,11 @@ import "./Register.css"
 import { useAuth } from '../store/Auth'
 import { toast } from 'react-toastify';
 
-const url = "http://localhost:5000/api/auth/register";
+// const url = "http://localhost:5000${API}/api/auth/register";
 
 const Register = () => {
   const navigate = useNavigate();
-  const {storeTokenInLS} = useAuth();
+  const {storeTokenInLS,API} = useAuth();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -29,7 +29,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${API}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
