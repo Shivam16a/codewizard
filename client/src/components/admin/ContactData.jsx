@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Admin.css"
+import { toast } from 'react-toastify';
 
 const ContactData = () => {
     const [contacts, setContacts] = useState([]);
@@ -7,7 +8,9 @@ const ContactData = () => {
 
     const getContactData = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/contact/contactdata");
+            const res = await fetch("http://localhost:5000/api/contact/contactdata", {
+                method: "GET",
+            });
             const data = await res.json();
             setContacts(data);
             setLoading(false);
@@ -16,6 +19,25 @@ const ContactData = () => {
             setLoading(false);
         }
     };
+
+    const deletecontact = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/contact/deletcontact/${id}`, {
+                method: "DELETE",
+            })
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success("Contact Deleted success");
+                setContacts(prevContacts => prevContacts.filter(contact => contact._id !== id))
+            } else {
+                toast.error(data.msg || "Error Deleting contact");
+            }
+        } catch (error) {
+            console.log("Error deleting contact:", error);
+            toast.error("Something went wrong");
+        }
+    }
 
     useEffect(() => {
         getContactData();
@@ -47,7 +69,7 @@ const ContactData = () => {
                             <td>{contact.username}</td>
                             <td>{contact.email}</td>
                             <td>{contact.message}</td>
-                            <td><button>Delete</button></td>
+                            <td><button onClick={() => deletecontact(contact._id)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
