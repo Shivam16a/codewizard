@@ -2,15 +2,30 @@ const User = require("../models/user-models.js");
 
 const adminUserdata = async (req, res,) => {
     try {
-        const response = await User.find({},{password:0});
-        if(response){
-            return res.status(200).json({mes:response});
+        const response = await User.find({}, { password: 0 });
+        if (response) {
+            return res.status(200).json({ mes: response });
         }
-        return res.status(400).json({mes:"No user data found"});
+        return res.status(400).json({ mes: "No user data found" });
     } catch (error) {
         console.log(`AdminUser:${error}`);
-        
+
     }
 }
 
-module.exports = adminUserdata;
+const deleteuser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleted = await User.findByIdAndDelete(id);
+
+        if (!deleted) {
+            return res.status(404).json({ mes: "user not found" });
+        }
+        return res.status(200).json({ mes: "user deleted successfully" });
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+module.exports = { adminUserdata, deleteuser };

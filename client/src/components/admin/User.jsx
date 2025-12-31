@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Admin.css"
+import { toast } from 'react-toastify';
 
 const User = () => {
     const [users, setUsers] = useState([]);
@@ -7,9 +8,11 @@ const User = () => {
 
     const getUsersData = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/admin/user");
+            const res = await fetch("http://localhost:5000/api/admin/user", {
+                method: "GET",
+            });
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             setUsers(data.mes);
             setLoading(false);
         } catch (error) {
@@ -17,6 +20,25 @@ const User = () => {
             setLoading(false);
         }
     };
+
+    const deletuser = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/admin/deleteuser/${id}`, {
+                method: "DELETE",
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success("User Deleted Successfully");
+                setUsers(prevUsers => prevUsers.filter(users => users._id !== id));
+            } else {
+                toast.error(data.mes || "Error Deleting Users");
+            }
+        } catch (error) {
+            console.log("Error Deleting Users:", error);
+            toast.error("Something went wrong");
+        }
+    }
 
     useEffect(() => {
         getUsersData();
@@ -50,7 +72,7 @@ const User = () => {
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
                             <td><button id="edit">Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td><button onClick={() => deletuser(user._id)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
