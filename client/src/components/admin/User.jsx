@@ -5,6 +5,26 @@ import { toast } from 'react-toastify';
 const User = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [editUser, setEditUser] = useState(null);
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        phone: ""
+    });
+    const handleEditClick = (user) => {
+        setEditUser(user._id);
+        setFormData({
+            username: user.username,
+            email: user.email,
+            phone: user.phone
+        });
+    };
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
     const getUsersData = async () => {
         try {
@@ -38,7 +58,41 @@ const User = () => {
             console.log("Error Deleting Users:", error);
             toast.error("Something went wrong");
         }
-    }
+    };
+
+    const updateuser = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/admin/updateuser/${editUser}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success("User updated successfully");
+
+                setUsers(prevUsers =>
+                    prevUsers.map(user =>
+                        user._id === editUser ? { ...user, ...formData } : user
+                    )
+                );
+
+                setEditUser(null); // close form
+            } else {
+                toast.error(data.mes || "Update failed");
+            }
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+    };
+
 
     useEffect(() => {
         getUsersData();
@@ -51,6 +105,41 @@ const User = () => {
     return <>
         <section>
             <h2>Users List</h2>
+            {editUser && (
+                <div className="edit-form">
+                    <h3>Edit User</h3>
+
+                    <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="Username"
+                    />
+
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                    />
+
+                    <input
+                        type="text"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Phone"
+                    />
+
+                    <div className="form-buttons">
+                        <button className="update-btn" onClick={updateuser}>Update</button>
+                        <button className="cancel-btn" onClick={() => setEditUser(null)}>Cancel</button>
+                    </div>
+                </div>
+            )}
+
 
             <table border="1" cellPadding="10" cellSpacing="0">
                 <thead>
@@ -71,7 +160,7 @@ const User = () => {
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td><button id="edit">Edit</button></td>
+                            <td><button id="edit" onClick={() => handleEditClick(user)}>Edit</button></td>
                             <td><button onClick={() => deletuser(user._id)}>Delete</button></td>
                         </tr>
                     ))}
