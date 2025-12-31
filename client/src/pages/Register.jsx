@@ -127,6 +127,9 @@ const Register = () => {
               <div className='btn'>
                 <button type='submit'>Register</button>
               </div>
+              <div style={{textAlign:"center"}}>
+                <span>already have an account <a href="/login">Login Now!</a></span>
+              </div>
             </form>
           </div>
         </div>

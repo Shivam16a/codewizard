@@ -49,7 +49,7 @@ const User = () => {
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td><button>Edit</button></td>
+                            <td><button id="edit">Edit</button></td>
                             <td><button>Delete</button></td>
                         </tr>
                     ))}

@@ -57,12 +57,12 @@ button {
 }
 
 /* Edit button */
-td button:first-child {
+td #edit {
     background-color: #4caf50;
     color: white;
 }
 
-td button:first-child:hover {
+td #edit:hover {
     background-color: #43a047;
 }
 
@@ -124,7 +124,6 @@ html {
 .adminroute {
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
 
     a {
         text-decoration: none;

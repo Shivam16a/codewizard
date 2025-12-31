@@ -95,6 +95,9 @@ const Login = () => {
             <div>
               <button type='submit'>Login</button>
             </div>
+            <div style={{textAlign:"center"}}>
+              <span>don't have an account <a href="/register">Register Now!</a></span>
+            </div>
           </form>
         </div>
       </div>
