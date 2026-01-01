@@ -14,7 +14,7 @@ const connectDb = require("./utils/db.js");
 const corsOptions = {
     origin: [
         "http://localhost:5173",          // local
-        "https://codewizardnewshivam.vercel.app" // production
+        "https://codewizards-nine.vercel.app/" // production
     ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
