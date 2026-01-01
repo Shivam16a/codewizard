@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="parrent1">
         <div className="footer-div first">
           <a
-            href="https://wa.me/919876543210?text=Hello%20CODEWIZARD,%20I%20want%20to%20contact%20you"
+            href="https://wa.me/8002632535?text=Hello%20CODEWIZARD,%20I%20want%20to%20contact%20you"
             target="_blank"
             rel="noopener noreferrer"
           >
