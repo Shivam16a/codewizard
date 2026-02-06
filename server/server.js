@@ -10,14 +10,17 @@ const serviceRoute = require("./router/service-router.js");
 const adminRout = require("./router/admin-router.js");
 const connectDb = require("./utils/db.js");
 
-/* ✅ CORS FIX */
 const corsOptions = {
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true
+  origin: [
+    "http://localhost:5173",
+    "https://codewizard-omega.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  credentials: true
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", router);
@@ -25,11 +28,10 @@ app.use("/api/contact", contactRout);
 app.use("/api/service", serviceRoute);
 app.use("/api/admin", adminRout);
 
-/* ✅ PORT FIX */
 const PORT = process.env.PORT || 5000;
 
 connectDb().then(() => {
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
 });
