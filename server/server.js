@@ -12,9 +12,7 @@ const connectDb = require("./utils/db.js");
 
 /* ✅ CORS FIX */
 const corsOptions = {
-    origin: [
-        "*" 
-    ],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
 };
