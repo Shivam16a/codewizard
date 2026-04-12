@@ -26,6 +26,8 @@ const Register = () => {
     });
   }
 
+  //handle submin request and response
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
