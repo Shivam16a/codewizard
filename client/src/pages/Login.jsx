@@ -23,6 +23,8 @@ const Login = () => {
       [name]: value,
     });
   }
+
+  //handling form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
