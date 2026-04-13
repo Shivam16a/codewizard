@@ -16,6 +16,7 @@ const Register = () => {
     phone: "",
     password: "",
   });
+  // handle input
   const handleInput = (e) => {
     console.log(e);
     let name = e.target.name;
