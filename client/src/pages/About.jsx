@@ -5,6 +5,7 @@ const About = () => {
   const {users} = useAuth();
   const user = users?.username;
   return <>
+  {/* About section for user */}
     <section className='about-section' style={{ paddingTop: "2rem" }}>
       <div className="grid grid-two-cols">
         <div className="first-div">
