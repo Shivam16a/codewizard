@@ -41,7 +41,7 @@ const About = () => {
         </div>
       </div>
     </section>
-
+{/* about service */}
     <section className='second-section'>
       <div className="grid grid-four-cols">
         <div className="div1">
