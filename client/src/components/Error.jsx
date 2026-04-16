@@ -4,7 +4,7 @@ import "./Error.css";
 
 const NotFound = () => {
   const navigate = useNavigate();
-
+// error page
   return (
     <div className="notfound-container">
       <h1 className="notfound-code">404</h1>
