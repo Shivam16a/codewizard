@@ -6,7 +6,7 @@
         border-radius: 10px;
         box-shadow: 0px 0px 10px #29292a, 0px 0px 20px black;
         width: 30%;
-
+/* input and button for service */
         input,
         button {
             width: 100%;
